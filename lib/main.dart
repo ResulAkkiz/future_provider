@@ -25,7 +25,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(todoProvider);
+    final list = ref.watch(todoProvider(10));
     return Scaffold(
       body: list.when(
         data: (todoList) {

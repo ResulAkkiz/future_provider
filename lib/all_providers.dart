@@ -8,9 +8,9 @@ final dioProvider = Provider<Dio>(
   },
 );
 
-final todoProvider = FutureProvider<List<Todo>>((ref) async {
+final todoProvider = FutureProvider.family<List<Todo>, int>((ref, limit) async {
   final dio = ref.watch(dioProvider);
-  final response = await dio.get('todos');
+  final response = await dio.get('todos', queryParameters: {'limit': limit});
   final List<dynamic> todosList = response.data['todos'];
   List<Todo> result = todosList.map((todo) => Todo.fromJson(todo)).toList();
   return result;
